@@ -22,6 +22,7 @@ include_recipe "zsh"
 
 search( :users, "shell:*zsh AND NOT action:remove" ).each do |u|
   user_id = u["id"]
+  next unless File.exists? "/home/#{user_id}"
 
   git "/home/#{user_id}/.oh-my-zsh" do
     repository "https://github.com/robbyrussell/oh-my-zsh.git"
